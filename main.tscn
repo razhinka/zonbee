@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://bctg38dblh7mf"]
+
+[ext_resource type="Texture2D" uid="uid://fvja0kdo6dib" path="res://assets/a1db299308f9b75d3c162b23d09b0d83.jpg" id="1_wcx6w"]
+[ext_resource type="PackedScene" uid="uid://bj7s3swdcf02f" path="res://zonbee.tscn" id="2_8v0jj"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_ru4rb"]
+lightmap_size_hint = Vector2i(152, 152)
+add_uv2 = true
+size = Vector2(30, 30)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0hc65"]
+albedo_texture = ExtResource("1_wcx6w")
+roughness = 0.0
+roughness_texture_channel = 1
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_q7dfd"]
+
+[sub_resource type="Environment" id="Environment_cx6l5"]
+background_mode = 1
+background_color = Color(0.568853, 0.824827, 0.984392, 1)
+ssr_fade_in = 0.126134
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_krpdj"]
+
+[node name="Main" type="Node"]
+
+[node name="Arena" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena"]
+transform = Transform3D(3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, 0, 0, 0)
+mesh = SubResource("QuadMesh_ru4rb")
+surface_material_override/0 = SubResource("StandardMaterial3D_0hc65")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_q7dfd")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.741976, 0.670427, 0, -0.670427, 0.741976, 0, 36.118, 51.53)
+fov = 47.7
+size = 26.225
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_cx6l5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 0.554975, 0.831867, 0, -0.831867, 0.554975, 135.399, 37.0933, 153.584)
+shadow_enabled = true
+
+[node name="Zonbee" parent="." instance=ExtResource("2_8v0jj")]
+transform = Transform3D(19.9997, 0.109606, 0, -0.109606, 19.9997, 0, 0, 0, 20, 11.4307, 2.90542, -11.9096)
+Speed = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -0.684632, 0, 0)
+mesh = SubResource("CylinderMesh_krpdj")

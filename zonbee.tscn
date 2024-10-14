@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://bj7s3swdcf02f"]
+
+[ext_resource type="Script" path="res://Zonbee.cs" id="1_1wyhv"]
+[ext_resource type="Texture2D" uid="uid://dwvb1co8x8eeh" path="res://assets/zonbee_walk.png" id="2_k0bi6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7hkpm"]
+size = Vector3(0.144428, 0.297363, 0.163208)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tl2yw"]
+atlas = ExtResource("2_k0bi6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5k11"]
+atlas = ExtResource("2_k0bi6")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xsr6p"]
+atlas = ExtResource("2_k0bi6")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y47ir"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_tl2yw")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_v5k11")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_xsr6p")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="Zonbee" type="CharacterBody3D"]
+script = ExtResource("1_1wyhv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00207344, -0.00219727, 0.00909425)
+shape = SubResource("BoxShape3D_7hkpm")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+cast_shadow = 2
+visibility_range_fade_mode = 2
+billboard = 2
+shaded = true
+alpha_cut = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_y47ir")
+animation = &"walk"
+autoplay = "walk"
+frame_progress = 0.316505
